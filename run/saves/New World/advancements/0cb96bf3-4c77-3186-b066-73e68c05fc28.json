@@ -1,0 +1,9 @@
+{
+  "minecraft:recipes/misc/diamond": {
+    "criteria": {
+      "has_diamond_block": "2021-10-26 16:33:48 +0700"
+    },
+    "done": true
+  },
+  "DataVersion": 2730
+}

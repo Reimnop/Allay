@@ -1,0 +1,9 @@
+{
+  "item.allay.pee_sea" : "Pee Sea",
+  "key.allay.flood_fill" : "Flood Fill",
+  "category.allay.keybinds" : "Allay Keybinds",
+  "item.allay.ryu_spawn_egg" : "Ryu Spawn Egg",
+  "item.allay.allay_spawn_egg" : "Allay Spawn Egg",
+  "entity.allay.ryu" : "Ryu",
+  "entity.allay.allay" : "Allay"
+}

@@ -1,0 +1,24 @@
+{
+  "minecraft:recipes/building_blocks/copper_block": {
+    "criteria": {
+      "has_copper_ingot": "2021-10-20 13:41:13 +0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/lightning_rod": {
+    "criteria": {
+      "has_copper_ingot": "2021-10-20 13:41:13 +0700"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:taiga": "2021-10-20 13:42:00 +0700",
+      "minecraft:taiga_hills": "2021-10-20 13:41:51 +0700",
+      "minecraft:beach": "2021-10-20 13:41:21 +0700",
+      "minecraft:river": "2021-10-20 13:41:13 +0700"
+    },
+    "done": false
+  },
+  "DataVersion": 2730
+}
