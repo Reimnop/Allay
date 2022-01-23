@@ -40,7 +40,7 @@ public class PeeSeaItem extends Item {
             BlockPos pos = buf.readBlockPos();
 
             server.execute(() -> {
-                player.getServerWorld().setBlockState(pos, Blocks.YELLOW_WOOL.getDefaultState());
+                player.getWorld().setBlockState(pos, Blocks.YELLOW_WOOL.getDefaultState());
             });
         });
 
@@ -48,7 +48,7 @@ public class PeeSeaItem extends Item {
             BlockPos pos = buf.readBlockPos();
 
             server.execute(() -> {
-                floodFill(player.getServerWorld(), pos, 0);
+                floodFill(player.getWorld(), pos, 0);
             });
         });
     }
