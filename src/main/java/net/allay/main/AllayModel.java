@@ -1,21 +1,26 @@
 package net.allay.main;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
+import oshi.annotation.concurrent.Immutable;
 
-public class AllayModel extends EntityModel<Allay> implements ModelWithArms, ModelWithHead {
+public class AllayModel extends AnimalModel<Allay> implements ModelWithArms, ModelWithHead {
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart left_arm;
     private final ModelPart right_arm;
 
     public AllayModel(ModelPart modelPart) {
+        super();
+
         body = modelPart.getChild("body");
         head = modelPart.getChild("head");
         left_arm = modelPart.getChild("left_arm");
@@ -62,19 +67,11 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
         }
     }
 
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        body.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-        head.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-        left_arm.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-        right_arm.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-    }
-
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData root = modelData.getRoot();
-        ModelPartBuilder body_builder = ModelPartBuilder.create();
 
+        ModelPartBuilder body_builder = ModelPartBuilder.create();
         ModelPartData body = root.addChild("body", body_builder, ModelTransform.pivot(0.0F, 19.0F, 0.0F));
 
         ModelPartBuilder body_r1_builder = ModelPartBuilder.create();
@@ -116,5 +113,15 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
     @Override
     public ModelPart getHead() {
         return head;
+    }
+
+    @Override
+    protected Iterable<ModelPart> getHeadParts() {
+        return ImmutableList.of(head);
+    }
+
+    @Override
+    protected Iterable<ModelPart> getBodyParts() {
+        return ImmutableList.of(body,  left_arm, right_arm);
     }
 }
