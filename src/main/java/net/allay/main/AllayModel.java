@@ -1,23 +1,22 @@
 package net.allay.main;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.ModelWithHead;
+import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 
-public class AllayModel extends AnimalModel<AllayEntity> implements ModelWithArms, ModelWithHead {
+public class AllayModel extends SinglePartEntityModel<AllayEntity> implements ModelWithArms, ModelWithHead {
+    private final ModelPart root;
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart left_arm;
     private final ModelPart right_arm;
 
     public AllayModel(ModelPart modelPart) {
-        super();
-
+        this.root = modelPart;
         body = modelPart.getChild("body");
         head = modelPart.getChild("head");
         left_arm = modelPart.getChild("left_arm");
@@ -113,12 +112,7 @@ public class AllayModel extends AnimalModel<AllayEntity> implements ModelWithArm
     }
 
     @Override
-    protected Iterable<ModelPart> getHeadParts() {
-        return ImmutableList.of(head);
-    }
-
-    @Override
-    protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(body,  left_arm, right_arm);
+    public ModelPart getPart() {
+        return root;
     }
 }
