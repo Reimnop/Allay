@@ -14,20 +14,19 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
     private final ModelPart head;
     private final ModelPart left_arm;
     private final ModelPart right_arm;
-    private final ModelPart left_wing;
-    private final ModelPart right_wing;
 
     public AllayModel(ModelPart modelPart) {
         body = modelPart.getChild("body");
         head = modelPart.getChild("head");
         left_arm = modelPart.getChild("left_arm");
         right_arm = modelPart.getChild("right_arm");
-        left_wing = modelPart.getChild("left_wing");
-        right_wing = modelPart.getChild("right_wing");
     }
 
     @Override
     public void setAngles(Allay entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+        ModelPart left_wing = head.getChild("left_wing");
+        ModelPart right_wing = head.getChild("right_wing");
+
         left_wing.yaw = (MathHelper.sin(animationProgress * 0.8f) - 0.5f) * MathHelper.PI * 0.125f;
         right_wing.yaw = -left_wing.yaw;
 
@@ -69,8 +68,6 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
         head.render(matrices, vertices, light, overlay, red, green, blue, alpha);
         left_arm.render(matrices, vertices, light, overlay, red, green, blue, alpha);
         right_arm.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-        left_wing.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-        right_wing.render(matrices, vertices, light, overlay, red, green, blue, alpha);
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -85,8 +82,8 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
         ModelPartData body_r1 = body.addChild("body_r1", body_r1_builder, ModelTransform.of(0.0F, 0.0F, 0.0F, 0.5236F, 0.0F, 0.0F));
 
         ModelPartBuilder head_builder = ModelPartBuilder.create();
-        head_builder.uv(0, 0).cuboid(-2.5F, -10.0F, -2.5F, 5.0F, 5.0F, 5.0F, false);
-        ModelPartData head = root.addChild("head", head_builder, ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        head_builder.uv(0, 0).cuboid(-2.5F, -5.0F, -2.5F, 5.0F, 5.0F, 5.0F, false);
+        ModelPartData head = root.addChild("head", head_builder, ModelTransform.pivot(0.0F, 19.0F, 0.0F));
 
         ModelPartBuilder left_arm_builder = ModelPartBuilder.create();
         left_arm_builder.uv(0, 0).cuboid(0.0F, 0.0F, -0.5F, 1.0F, 4.0F, 1.0F, false);
@@ -98,11 +95,11 @@ public class AllayModel extends EntityModel<Allay> implements ModelWithArms, Mod
 
         ModelPartBuilder left_wing_builder = ModelPartBuilder.create();
         left_wing_builder.uv(0, 10).cuboid(0.0F, -3.0F, 0.0F, 6.0F, 5.0F, 1.0F, false);
-        ModelPartData left_wing = root.addChild("left_wing", left_wing_builder, ModelTransform.pivot(1.5F, 19.0F, 2.5F));
+        ModelPartData left_wing = head.addChild("left_wing", left_wing_builder, ModelTransform.pivot(1.5F, 0.0F, 2.5F));
 
         ModelPartBuilder right_wing_builder = ModelPartBuilder.create();
         right_wing_builder.uv(0, 10).cuboid(-6.0F, -3.0F, 0.0F, 6.0F, 5.0F, 1.0F, true);
-        ModelPartData right_wing = root.addChild("right_wing", right_wing_builder, ModelTransform.pivot(-1.5F, 19.0F, 2.5F));
+        ModelPartData right_wing = head.addChild("right_wing", right_wing_builder, ModelTransform.pivot(-1.5F, 0.0F, 2.5F));
 
         return TexturedModelData.of(modelData, 32, 32);
     }
