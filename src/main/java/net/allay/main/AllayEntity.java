@@ -2,12 +2,10 @@ package net.allay.main;
 
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.PlayerAdvancementTracker;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.pathing.BirdNavigation;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -37,7 +35,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class Allay extends PathAwareEntity implements Tameable {
+public class AllayEntity extends PathAwareEntity implements Tameable {
     private static final TrackedData<Optional<UUID>> OWNER_UUID;
 
     private static final byte TAME_SUCCESSFUL = 90;
@@ -45,7 +43,7 @@ public class Allay extends PathAwareEntity implements Tameable {
 
     public List<ItemStack> inventory = new ArrayList();
 
-    protected Allay(EntityType<? extends PathAwareEntity> entityType, World world) {
+    protected AllayEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
         moveControl = new FlightMoveControl(this, 10, true);
         setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
@@ -54,7 +52,7 @@ public class Allay extends PathAwareEntity implements Tameable {
     }
 
     static {
-        OWNER_UUID = DataTracker.registerData(Allay.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+        OWNER_UUID = DataTracker.registerData(AllayEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
 
     @Override
@@ -273,12 +271,12 @@ public class Allay extends PathAwareEntity implements Tameable {
     }
 
     private static class PickupItemsGoal extends Goal {
-        private final Allay allay;
+        private final AllayEntity allay;
         private final double range;
 
         private ItemEntity destItem = null;
 
-        public PickupItemsGoal(Allay allay, double range) {
+        public PickupItemsGoal(AllayEntity allay, double range) {
             this.allay = allay;
             this.range = range;
             setControls(EnumSet.of(Control.MOVE));
@@ -331,9 +329,9 @@ public class Allay extends PathAwareEntity implements Tameable {
     }
 
     private static class FollowOwnerGoal extends Goal {
-        private final Allay allay;
+        private final AllayEntity allay;
 
-        public FollowOwnerGoal(Allay allay) {
+        public FollowOwnerGoal(AllayEntity allay) {
             this.allay = allay;
             setControls(EnumSet.of(Control.MOVE));
         }
@@ -356,10 +354,10 @@ public class Allay extends PathAwareEntity implements Tameable {
     }
 
     private static class FlyRandomlyGoal extends Goal {
-        private final Allay allay;
+        private final AllayEntity allay;
         private final double range;
 
-        public FlyRandomlyGoal(Allay allay, double range) {
+        public FlyRandomlyGoal(AllayEntity allay, double range) {
             this.allay = allay;
             this.range = range;
             setControls(EnumSet.of(Control.MOVE));

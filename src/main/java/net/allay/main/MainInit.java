@@ -25,10 +25,10 @@ public class MainInit implements ModInitializer {
 			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Ryu::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)).build()
 	);
 	public static final Item RYU_SPAWN_EGG = new SpawnEggItem(RYU, 11363325, 14595579, new Item.Settings().group(ItemGroup.MISC));
-	public static final EntityType<Allay> ALLAY = Registry.register(
+	public static final EntityType<AllayEntity> ALLAY = Registry.register(
 			Registry.ENTITY_TYPE,
 			new Identifier("allay", "allay"),
-			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Allay::new).dimensions(EntityDimensions.fixed(0.3125f, 0.625f)).build()
+			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AllayEntity::new).dimensions(EntityDimensions.fixed(0.3125f, 0.625f)).build()
 	);
 	public static final Item ALLAY_SPAWN_EGG = new SpawnEggItem(ALLAY, 897260, 4125951, new Item.Settings().group(ItemGroup.MISC));
 
@@ -37,7 +37,7 @@ public class MainInit implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("allay", "pee_sea"), PEE_SEA_ITEM);
 		FabricDefaultAttributeRegistry.register(RYU, Ryu.createMobAttributes());
 		Registry.register(Registry.ITEM, new Identifier("allay", "ryu_spawn_egg"), RYU_SPAWN_EGG);
-		FabricDefaultAttributeRegistry.register(ALLAY, Allay.createAllayAttributes());
+		FabricDefaultAttributeRegistry.register(ALLAY, AllayEntity.createAllayAttributes());
 		Registry.register(Registry.ITEM, new Identifier("allay", "allay_spawn_egg"), ALLAY_SPAWN_EGG);
 	}
 }

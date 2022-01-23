@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
-public class AllayRenderer extends MobEntityRenderer<Allay, AllayModel> {
+public class AllayRenderer extends MobEntityRenderer<AllayEntity, AllayModel> {
 
     public AllayRenderer(EntityRendererFactory.Context context) {
         super(context, new AllayModel(context.getPart(ClientInit.MODEL_ALLAY_LAYER)), 0.15625f);
@@ -23,7 +23,7 @@ public class AllayRenderer extends MobEntityRenderer<Allay, AllayModel> {
     }
 
     @Override
-    public Identifier getTexture(Allay entity) {
+    public Identifier getTexture(AllayEntity entity) {
         return new Identifier("allay", "textures/entity/allay.png");
     }
 

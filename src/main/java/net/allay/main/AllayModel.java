@@ -2,17 +2,14 @@ package net.allay.main;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.AnimalModel;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
-import oshi.annotation.concurrent.Immutable;
 
-public class AllayModel extends AnimalModel<Allay> implements ModelWithArms, ModelWithHead {
+public class AllayModel extends AnimalModel<AllayEntity> implements ModelWithArms, ModelWithHead {
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart left_arm;
@@ -28,7 +25,7 @@ public class AllayModel extends AnimalModel<Allay> implements ModelWithArms, Mod
     }
 
     @Override
-    public void setAngles(Allay entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setAngles(AllayEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         ModelPart left_wing = head.getChild("left_wing");
         ModelPart right_wing = head.getChild("right_wing");
 
