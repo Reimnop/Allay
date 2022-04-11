@@ -1,6 +1,8 @@
 package net.allay.main;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ModelWithArms;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -9,13 +11,15 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
 
 public class AllayModel extends SinglePartEntityModel<AllayEntity> implements ModelWithArms, ModelWithHead {
-    private final ModelPart root;
-    private final ModelPart body;
-    private final ModelPart head;
-    private final ModelPart left_arm;
-    private final ModelPart right_arm;
+    public final ModelPart root;
+    public final ModelPart body;
+    public final ModelPart head;
+    public final ModelPart left_arm;
+    public final ModelPart right_arm;
 
     public AllayModel(ModelPart modelPart) {
+        super(RenderLayer::getEntityTranslucent);
+
         this.root = modelPart;
         body = modelPart.getChild("body");
         head = modelPart.getChild("head");
@@ -61,6 +65,11 @@ public class AllayModel extends SinglePartEntityModel<AllayEntity> implements Mo
             right_arm.pitch = MathHelper.cos(limbAngle * 0.85f + 3.1415927F) * 2.0F * limbDistance * 0.5F / k;
             left_arm.pitch = MathHelper.cos(limbAngle * 0.85f) * 2.0F * limbDistance * 0.5F / k;
         }
+    }
+
+    @Override
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+        getPart().render(matrices, vertices, light, overlay, red, green, blue, alpha * 0.8f);
     }
 
     public static TexturedModelData getTexturedModelData() {
